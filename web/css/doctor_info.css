@@ -1,0 +1,69 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 5, 2022, 7:44:47 PM
+    Author     : ALYA
+*/
+html, body { 
+    font-family: "Lato", sans-serif; 
+    font-size: 15px; 
+    line-height: 1.5; 
+    box-sizing: border-box; 
+    margin: 0; 
+    overflow-x: hidden; 
+    top: 0; 
+    left: 0; 
+    background-color: #F8F5FF;
+} 
+
+
+.content {
+    display: flex;
+    height: auto;
+    padding-left: 100px;
+    padding-right: 60px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+            
+.elKotak{
+    width: 420px;
+    height: 450px;
+    background-color: white;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    padding: 40px;
+    margin: 0 70px 60px 70px;
+}
+            
+.kotak{ margin: auto;}
+            
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn1 {
+    background-color: #7E538D;
+    color: white;
+    border: 2px solid gainsboro;
+    width: 50%;
+    height: 35px;
+}
+
+
+            
+

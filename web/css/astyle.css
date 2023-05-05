@@ -1,0 +1,106 @@
+
+
+.user_card{
+	height: 450px;
+	width: 350px;
+	margin-top: auto;
+	margin-bottom: auto;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 5px;
+}
+
+.brand_logo_container{
+	position: absolute;
+	height: 170px; 
+	width: 170px;
+	top: -75px;
+	border-radius: 50%;
+	background-color: maroon;
+	padding: 10px;
+	text-align: center;
+}
+
+.brand_logo{
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+	border: 2px solid white;
+}
+
+.form_container{
+	margin-top: 100px;
+}
+
+.form-control{
+    background-color: #f5f4f2;
+}
+
+.login_btn{
+	width: 100%;
+	background: maroon !important;
+	color: white !important;
+}
+
+.login_btn:focus{
+	box-shadow: none !important; 
+	outline: 0px !important;
+}
+.login_container{
+	padding: 0 2rem;	
+}
+.input-group-text{
+	background: maroon !important;
+	color: white !important;
+	border: 0 !important;
+	border-radius: 0.25rem 0 0 0.25rem !important;
+    height: 40px;
+}
+.input_user,
+.input_pass:focus{
+	box-shadow: none !important;
+	outline: 0px !important;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+	background-color: #c0392b !important;
+}
+
+.kotak {
+    width: 1300px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.KotakAtas {
+    width: 500px;
+    height: 300px;
+    float: left;
+    margin: 100px;
+}
+
+.KotakBawah {
+    background-color: white;
+    width: 350px;
+    height: 400px;
+    float: left;
+    margin: 40px;
+    border: 1px solid #E5E4E2;
+    border-radius: 1em;
+    padding: 40px;
+}
+
+.btnAll {
+    background-color: #7E538D;
+    border: 1px solid #7E538D;
+    color: white; 
+    border-radius: 0px; 
+    width: 200px;
+    height: 45px;
+}
