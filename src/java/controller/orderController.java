@@ -57,7 +57,7 @@ public class orderController extends HttpServlet {
             order.setId(rs.getString(1));
             order.setDate(rs.getString(2));
             order.setTotal(rs.getString(3));
-//            order.setStatus(rs.getString(4));
+            order.setStatus(rs.getString(4));
             order.setPayment(rs.getString(5));
             order.setCourier(rs.getString(6));
             order.setTrackingno(rs.getString(7));
