@@ -86,11 +86,11 @@ and open the template in the editor.
                 <c:out value="${product.packing}" /><br> <br>
                 <center><b style="font-size: 22px; color: #7E538D""> MYR <c:out value="${product.price}" /> </b></center> <br>
                 
-                <button class="btn1"> <a href="admin_editProduct.jsp?id=<c:out value="${product.id}" />"> Delete product </a> </button>
-                <button class="btn2"> <a href="deleteProductController?id=<c:out value="${product.id}" />" style="color:#7E538D" onclick="return confirm('Are you sure you want to delete the product?')"> Edit product</a> </button>
+                <!--<button class="btn1"> <a href="admin_editProduct.jsp?id=<c:out value="${product.id}" />"> Delete product </a> </button>-->
+                <!--<button class="btn2"> <a href="deleteProductController?id=<c:out value="${product.id}" />" style="color:#7E538D" onclick="return confirm('Are you sure you want to delete the product?')"> Edit product</a> </button>-->
            
-<!--                <button class="btn1"> <a href="admin_editProduct.jsp?id=<c:out value="${product.id}" />"> Edit product</a> </button>
-                <button class="btn2"> <a href="deleteProductController?id=<c:out value="${product.id}" />" style="color:#7E538D" onclick="return confirm('Are you sure you want to delete the product?')"> Delete product</a> </button>-->
+                <button class="btn1"> <a href="admin_editProduct.jsp?id=<c:out value="${product.id}" />"> Edit product</a> </button>
+                <button class="btn2"> <a href="deleteProductController?id=<c:out value="${product.id}" />" style="color:#7E538D" onclick="return confirm('Are you sure you want to delete the product?')"> Delete product</a> </button>
             </div> 
                 
             </c:forEach>
