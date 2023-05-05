@@ -62,7 +62,7 @@
     <body>
         <div class="content">
             <div style="width:500px"> <h2><b> Our Doctors </b></h2> </div>
-            <div style="width:500px"> <button class="btn1" style="width:200px; float: right;"> <a href="admin_doctor_add.jsp">Add Doctor</a> </button></div>
+            <!--<div style="width:500px"> <button class="btn1" style="width:200px; float: right;"> <a href="admin_doctor_add.jsp">Add Doctor</a> </button></div>-->
         </div><br><br>
         
         <% 

@@ -101,7 +101,7 @@
                             <td><%=rs.getString(8) %></td>
                             <td>
 <!--                                <a href="#" class="view"><i class="fas fa-eye"></i></a>-->
-                                <a href="admin_doctor_edit.jsp?staffID=<%=rs.getString(2) %>" class="edit"><i class="fas fa-edit"></i></a>
+                                <!--<a href="admin_doctor_edit.jsp?staffID=<%=rs.getString(2) %>" class="edit"><i class="fas fa-edit"></i></a>-->
                                 <a href="deleteDoctorController?staffID=<%=rs.getString(2) %>" class="delete" onclick="return confirm('Are you sure you want to delete the doctor?')"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
