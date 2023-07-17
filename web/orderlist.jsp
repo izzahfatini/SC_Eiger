@@ -83,7 +83,6 @@
         <div style="background-color: #F8F5FF;">
              <center><h2><b> Order List </b></h2></center>
              <br><br>
-             <!--<a href="PDFController" class="printbtn"><button>Order List Report</button></a>-->
              <center>
                  <c:choose>
                      <c:when test="${empty orders}">

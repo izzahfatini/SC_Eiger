@@ -96,7 +96,7 @@ public class loginController extends HttpServlet {
         }
         con.close();
     }
-    
+
     public boolean isAdmin(String e, String p)  {
         if(e.equals("admin@gmail.com") && p.equals("admin")) {
             return true;
