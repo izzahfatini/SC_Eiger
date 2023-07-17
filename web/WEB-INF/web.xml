@@ -116,6 +116,10 @@
         <servlet-name>updateToShipped</servlet-name>
         <servlet-class>controller.updateToShipped</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PDFController</servlet-name>
+        <servlet-class>controller.PDFController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addProductController</servlet-name>
         <url-pattern>/addProductController</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>updateToShipped</servlet-name>
         <url-pattern>/updateToShipped</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PDFController</servlet-name>
+        <url-pattern>/PDFController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

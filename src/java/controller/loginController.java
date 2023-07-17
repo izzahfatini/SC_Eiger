@@ -49,8 +49,7 @@ public class loginController extends HttpServlet {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost/leoClinic?", "root", "");
         
-        if(email.equals("admin@gmail.com") && password.equals("admin"))
-//        if(isadmin(email,password))
+        if(isAdmin(email, password))
         {
             Statement st = con.createStatement(); 
             ResultSet rs = st.executeQuery("SELECT * FROM user where email='"+email+"' and password='"+password+"'");
@@ -97,13 +96,13 @@ public class loginController extends HttpServlet {
         }
         con.close();
     }
-    
-//    public boolean isadmin(String e, String p) {
-//        if(e.equals("admin@gmail.com") && p.equals("admin")) {
-//            return true;
-//        }
-//        return false;
-//    }
+
+    public boolean isAdmin(String e, String p)  {
+        if(e.equals("admin@gmail.com") && p.equals("admin")) {
+            return true;
+        }
+        return false;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
