@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.User"%>
+<%@page import="model.NullUser"%>
+<% User u = (User) session.getAttribute("user"); %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,19 +50,29 @@
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item" style="padding-left: 30px;">
-                            <a class="nav-link" href="viewCartController"><img src="images/cart.png" width="70%"></a>
+                            <% if (u.isNull()) { %>
+                                <a class="nav-link" href="login.jsp"><img src="images/cart.png" width="70%"></a>
+                            <% } else { %>
+                                <a class="nav-link" href="viewCartController"><img src="images/cart.png" width="70%"></a>
+                            <% } %>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="images/user.png" width="40%">
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="myAccount.jsp">My Account</a>
-                                <a class="dropdown-item" href="orderController">My Order</a>
-                                <a class="dropdown-item" href="logoutControler">Log out</a>
-                            </div>
+                            <% if (u.isNull()) { %>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="logoutControler">Log out</a>
+                                </div>
+                            <% } else { %>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="myAccount.jsp">My Account</a>
+                                    <a class="dropdown-item" href="orderController">My Order</a>
+                                    <a class="dropdown-item" href="logoutControler">Log out</a>
+                                </div>
+                            <% } %>
                         </li>
-                    </ul> 
+                    </ul>  
                 </div>
             </div>
             </nav>
