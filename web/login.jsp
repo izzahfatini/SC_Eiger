@@ -51,6 +51,15 @@
                 padding: 15px;
                 width: 320px;
             }
+            
+            .guestbtn {
+                background-color: #bebebe;
+                border: 1px solid #7E538D;
+                color: white; 
+                border-radius: 4px; 
+                width: 319px;
+                height: 45px;
+            }
         </style>
     </head>
     <body>
@@ -70,7 +79,7 @@
         <div class="container h-100">
             <div class="d-flex justify-content-center h-100">
                 <div class="user_card">
-                    <form action="loginController" method="post" name="form" class="Signup">
+                    <!--<form action="loginController" method="post" name="form" class="Signup">-->
                         <div class="container">
                             <div class="row"> 
                                 <div class="col-sm">
@@ -84,15 +93,18 @@
                                     <h1 style="text-align: center"> Login </h1>
                                     <p style="text-align: center; color: gray"> Enter your credentials to continue </p>
                                     <hr class="mb-3">
+                                    
+                                    <form action="loginController" method="post" name="form" class="Signup">
+                                        <label for="email"> <b>Email Address</b> </label>
+                                        <input class="form-control" type="email" name="email" required>
 
-                                    <label for="email"> <b>Email Address</b> </label>
-                                    <input class="form-control" type="email" name="email" required>
+                                        <label for="pswd"> <b>Password</b> </label>
+                                        <input class="form-control" type="password" name="password" required>
 
-                                    <label for="pswd"> <b>Password</b> </label>
-                                    <input class="form-control" type="password" name="password" required>
-
-                                    <hr class="mb-3">
-                                    <input class="btn btn-primary" type="submit" id="register" name="create" value="Login">
+                                        <hr class="mb-3">
+                                        <input class="btn btn-primary" type="submit" id="register" name="create" value="Login">
+                                    </form>
+                                    <a href="guestlogin"><button class="guestbtn">Guest Login</button></a>
                                     
                                     <div class="mt-4">
                                         <div class="d-flex justify-content-center links">
@@ -102,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    <!--</form>-->
                 </div>
             </div>
         </div>
