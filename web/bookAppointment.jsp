@@ -8,6 +8,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
 
+<%@page import="model.NullUser"%>
+<% User usr = (User) session.getAttribute("user"); %>
+
 <% 
     if ((User) session.getAttribute("user") == null)
     response.sendRedirect("login.jsp");
@@ -98,7 +101,12 @@
                                         <option>Fungal Infection Treatement</option>
                                     </select><br>
                                     <hr class="mb-3">
-                                    <input class="btnAll" name="submit" type="submit" value="Submit"/>
+<!--                                    <input class="btnAll" name="submit" type="submit" value="Submit"/>-->
+                                    <% if (usr.isNull()) { %>
+                                        <button class="btnAll"><a href="login.jsp">Login</a></button>
+                                    <% } else { %>
+                                        <input class="btnAll" name="submit" type="submit" value="Submit"/>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>

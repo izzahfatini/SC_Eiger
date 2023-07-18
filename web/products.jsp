@@ -10,7 +10,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="model.User"%>
-
+<%@page import="model.NullUser"%>
+<% User usr = (User) session.getAttribute("user"); %>
 <% 
     if ((User) session.getAttribute("user") == null)
     response.sendRedirect("login.jsp");
@@ -57,7 +58,12 @@
                 <form action="" method="post" class="item_input"> 
                         <input type="number" name="qty" value="1" class="quantity">
                         <input type="hidden" name="id" value="${product.id}">
-                        <input type="submit" name="add" style="border-radius: 12px" class="btn1" value="Add To Cart">
+                        <!--<input type="submit" name="add" style="border-radius: 12px" class="btn1" value="Add To Cart">-->
+                        <% if (usr.isNull()) { %>
+                            <button style="border-radius: 12px; color: white;" class="btn1"><a href="login.jsp">Add To Cart</a></button>
+                        <% } else { %>
+                            <input type="submit" name="add" style="border-radius: 12px" class="btn1" value="Add To Cart">
+                        <% } %>
                 </form>
             </div>
             </c:forEach>
