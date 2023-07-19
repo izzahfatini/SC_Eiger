@@ -7,7 +7,8 @@
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
-
+<%@page import="model.NullUser"%>
+<% User usr = (User) session.getAttribute("user"); %>
 <% 
     if ((User) session.getAttribute("user") == null)
     response.sendRedirect("login.jsp");
@@ -45,7 +46,11 @@
                 <p> <img src="images/calendar.png"><br>
                 <h2>Book Visit</h2>
                 Book a visit to our clinic to check your condition and receive our treatment.<br><br><br>
-                <button class="btnAll"><a href="bookAppointment.jsp"> Book Appointment </a></button>
+                <% if (usr.isNull()) { %>
+                    <button class="btnAll"><a href="login.jsp">Book Appointment</a></button>
+                <% } else { %>
+                    <button class="btnAll"><a href="bookAppointment.jsp">Book Appointment</a></button>
+                <% } %>
                 </p>
             </div>
             <div class="KotakBawah">

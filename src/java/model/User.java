@@ -62,5 +62,8 @@ public class User {
         this.address = address;
     }
     
+    public boolean isNull() {
+        return false;
+    }
     
 }
