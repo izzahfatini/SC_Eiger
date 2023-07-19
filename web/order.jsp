@@ -81,6 +81,8 @@
                         <option value="all">All</option>
                     </select> <input type="submit" name="submit" value="Select" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 </form>
+                
+                <button><a href=""><span>Print All</span></a></button>
             </div>
             <%
                 String linkall = "orderlist.jsp?sort=" + sort + "&status=all";
