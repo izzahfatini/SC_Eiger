@@ -53,7 +53,7 @@
                 <c:out value="${product.packing}" /> <br> <br>
                 <center><b style="font-size: 22px; color: #7E538D">RM <c:out value="${product.price}" /> </b></center> <br>
            
-                <!--<form action="addtocartController" method="post" class="item_input" onsubmit="addedtocart()">--> 
+                <form action="addtocartController" method="post" class="item_input" onsubmit="addedtocart()"> 
                 <form action="" method="post" class="item_input"> 
                         <input type="number" name="qty" value="1" class="quantity">
                         <input type="hidden" name="id" value="${product.id}">
