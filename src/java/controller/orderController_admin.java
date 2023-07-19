@@ -17,11 +17,13 @@ import model.User;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import model.Order;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -71,6 +73,29 @@ public class orderController_admin extends HttpServlet {
         int i_complete = 0;
         int i_cancel = 0;
         
+        String[] orderstatus = {"Pending", "Processing", "Shipped", "Complete", "Cancel"};
+
+        int[] os = new int[5];
+        os[0] = 0;  // i_pending
+        os[1] = 0;  // i_processing
+        os[2] = 0;  // i_shipped
+        os[3] = 0;  // i_complete
+        os[4] = 0;  // i_cancel
+        
+        ArrayList[] ordArray = new ArrayList[5];
+        ordArray[0] = new ArrayList();  // ords_pending
+        ordArray[1] = new ArrayList();  // ords_processing
+        ordArray[2] = new ArrayList();  // ords_shipped
+        ordArray[3] = new ArrayList();  // ords_complete
+        ordArray[4] = new ArrayList();  // ords_cancel
+        
+        float[] totalCollect = new float[5];
+        totalCollect[0] = 0.0f;  // total_pending
+        totalCollect[1] = 0.0f;  // total_processing
+        totalCollect[2] = 0.0f;  // total_shipped
+        totalCollect[3] = 0.0f;  // total_complete
+        totalCollect[4] = 0.0f;  // total_cancel
+
         //Get current Date
         Date currentDate = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat ("yyyy/MM/dd");
@@ -101,6 +126,7 @@ public class orderController_admin extends HttpServlet {
             ord = new Order(o_id, o_date, o_total,o_status,o_payment, o_email);
             ords.add(ord);
         }
+        
             switch (sort) {
                 case "today":
                     {
@@ -116,56 +142,19 @@ public class orderController_admin extends HttpServlet {
                                 ords_all.add(o);
                                 i_all++;
                                 
-                                if (null != status)   switch (status) {
-                                    
-                                    case "Pending":{
-                                        i_pending++;
-                                        ords_pending.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_pending += total;
-                                        total_all += total;
-                                        break;
+                                if (null != status) {
+                                    for (int j = 0; j < orderstatus.length; j++) {
+                                        if (status.equals(orderstatus[j])) {
+                                            os[j]++; 
+                                            ordArray[j].add(o); 
+
+                                            total = o.totalToFloat();
+                                            totalCollect[j] += total; 
+                                            total_all += total;
+                                        }
                                     }
-                                    case "Processing":{
-                                        i_processing++;
-                                        ords_processing.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_processing += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Shipped":{
-                                        i_shipped++;
-                                        ords_shipped.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_shipped += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Complete":{
-                                        i_complete++;
-                                        ords_complete.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_complete += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Cancel":{
-                                        i_cancel++;
-                                        ords_cancel.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_cancel += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    default:
-                                        break;
-                                }
+
+                                }  
                             }
                         }               break;
                     }
@@ -185,56 +174,18 @@ public class orderController_admin extends HttpServlet {
                                 ords_all.add(o);
                                 i_all++;
                                 
-                                if (null != status)   switch (status) {
-                                    
-                                    case "Pending":{
-                                        i_pending++;
-                                        ords_pending.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_pending += total;
-                                        total_all += total;
-                                        break;
+                                if (null != status)   {
+                                    for (int j = 0; j < orderstatus.length; j++) {
+                                        if (status.equals(orderstatus[j])) {
+                                            os[j]++; // i_pending++
+                                            ordArray[j].add(o); // ords_pending.add(o)
+
+                                            total = o.totalToFloat();
+                                            totalCollect[j] += total; // total_pending += total;
+                                            total_all += total;
+                                        }
                                     }
-                                    case "Processing":{
-                                        i_processing++;
-                                        ords_processing.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_processing += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Shipped":{
-                                        i_shipped++;
-                                        ords_shipped.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_shipped += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Complete":{
-                                        i_complete++;
-                                        ords_complete.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_complete += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Cancel":{
-                                        i_cancel++;
-                                        ords_cancel.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_cancel += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    default:
-                                        break;
-                                }
+                                }  
                             }
                         }               break;
                     }
@@ -248,56 +199,17 @@ public class orderController_admin extends HttpServlet {
                             status = o.getStatus();
                             ords_all.add(o);
                             i_all++;
-                            
-                            if (null != status)   switch (status) {
-                                
-                                case "Pending":{
-                                    i_pending++;
-                                    ords_pending.add(o);
-                                    
-                                    total = o.totalToFloat();
-                                    total_pending += total;
-                                    total_all += total;
-                                    break;
+                            if (null != status)   {
+                                for (int j = 0; j < orderstatus.length; j++) {
+                                    if (status.equals(orderstatus[j])) {
+                                        os[j]++;
+                                        ordArray[j].add(o); 
+
+                                        total = o.totalToFloat();
+                                        totalCollect[j] += total; 
+                                        total_all += total;
+                                    }
                                 }
-                                case "Processing":{
-                                    i_processing++;
-                                    ords_processing.add(o);
-                                    
-                                    total = o.totalToFloat();
-                                    total_processing += total;
-                                    total_all += total;
-                                    break;
-                                }
-                                case "Shipped":{
-                                    i_shipped++;
-                                    ords_shipped.add(o);
-                                    
-                                    total = o.totalToFloat();
-                                    total_shipped += total;
-                                    total_all += total;
-                                    break;
-                                }
-                                case "Complete":{
-                                    i_complete++;
-                                    ords_complete.add(o);
-                                    
-                                    total = o.totalToFloat();
-                                    total_complete += total;
-                                    total_all += total;
-                                    break;
-                                }
-                                case "Cancel":{
-                                    i_cancel++;
-                                    ords_cancel.add(o);
-                                    
-                                    total = o.totalToFloat();
-                                    total_cancel += total;
-                                    total_all += total;
-                                    break;
-                                }
-                                default:
-                                    break;
                             }
                         }               break;
                     }
@@ -313,25 +225,45 @@ public class orderController_admin extends HttpServlet {
         session.setAttribute("total_all", String.valueOf(total_all));
         session.setAttribute("i_all", String.valueOf(i_all));
         
-        session.setAttribute("ords_pending", ords_pending);
-        session.setAttribute("total_pending", String.valueOf(total_pending));
-        session.setAttribute("i_pending", String.valueOf(i_pending));
+        session.setAttribute("ords_pending", ordArray[0]);
+        session.setAttribute("total_pending", String.valueOf(totalCollect[0]));
+        session.setAttribute("i_pending", String.valueOf(os[0]));
         
-        session.setAttribute("ords_processing", ords_processing);
-        session.setAttribute("total_processing", String.valueOf(total_processing));
-        session.setAttribute("i_processing", String.valueOf(i_processing));
+        session.setAttribute("ords_processing", ordArray[1]);
+        session.setAttribute("total_processing", String.valueOf(totalCollect[1]));
+        session.setAttribute("i_processing", String.valueOf(os[1]));
         
-        session.setAttribute("ords_shipped", ords_shipped);
-        session.setAttribute("total_shipped", String.valueOf(total_shipped));
-        session.setAttribute("i_shipped", String.valueOf(i_shipped));
+        session.setAttribute("ords_shipped", ordArray[2]);
+        session.setAttribute("total_shipped", String.valueOf(totalCollect[2]));
+        session.setAttribute("i_shipped", String.valueOf(os[2]));
         
-        session.setAttribute("ords_complete", ords_complete);
-        session.setAttribute("total_complete", String.valueOf(total_complete));
-        session.setAttribute("i_complete", String.valueOf(i_complete));
+        session.setAttribute("ords_complete", ordArray[3]);
+        session.setAttribute("total_complete", String.valueOf(totalCollect[3]));
+        session.setAttribute("i_complete", String.valueOf(os[3]));
         
-        session.setAttribute("ords_cancel", ords_cancel);
-        session.setAttribute("total_cancel", String.valueOf(total_cancel));
-        session.setAttribute("i_cancel", String.valueOf(i_cancel));
+        session.setAttribute("ords_cancel", ordArray[4]);
+        session.setAttribute("total_cancel", String.valueOf(totalCollect[4]));
+        session.setAttribute("i_cancel", String.valueOf(os[4]));
+        
+//        session.setAttribute("ords_pending", ords_pending);
+//        session.setAttribute("total_pending", String.valueOf(total_pending));
+//        session.setAttribute("i_pending", String.valueOf(i_pending));
+//        
+//        session.setAttribute("ords_processing", ords_processing);
+//        session.setAttribute("total_processing", String.valueOf(total_processing));
+//        session.setAttribute("i_processing", String.valueOf(i_processing));
+//        
+//        session.setAttribute("ords_shipped", ords_shipped);
+//        session.setAttribute("total_shipped", String.valueOf(total_shipped));
+//        session.setAttribute("i_shipped", String.valueOf(i_shipped));
+//        
+//        session.setAttribute("ords_complete", ords_complete);
+//        session.setAttribute("total_complete", String.valueOf(total_complete));
+//        session.setAttribute("i_complete", String.valueOf(i_complete));
+//        
+//        session.setAttribute("ords_cancel", ords_cancel);
+//        session.setAttribute("total_cancel", String.valueOf(total_cancel));
+//        session.setAttribute("i_cancel", String.valueOf(i_cancel));
         
         RequestDispatcher rd = request.getRequestDispatcher("/order.jsp");
         rd.include(request,response);
