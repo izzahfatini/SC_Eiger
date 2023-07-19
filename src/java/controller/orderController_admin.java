@@ -17,11 +17,13 @@ import model.User;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import model.Order;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -71,6 +73,32 @@ public class orderController_admin extends HttpServlet {
         int i_complete = 0;
         int i_cancel = 0;
         
+        List orderstatus;
+        orderstatus = Arrays.asList(new String[] {"Pending", "Processing", "Shipped", "Complete", "Cancel"});
+        int[] os = new int[6];
+        os[0] = 0;  // i_all
+        os[1] = 0;  // i_pending
+        os[2] = 0;  // i_processing
+        os[3] = 0;  // i_shipped
+        os[4] = 0;  // i_complete
+        os[5] = 0;  // i_cancel
+        
+        ArrayList[] ordArray = new ArrayList[6];
+        ordArray[0] = new ArrayList();  // ords_all
+        ordArray[1] = new ArrayList();  // ords_pending
+        ordArray[2] = new ArrayList();  // ords_processing
+        ordArray[3] = new ArrayList();  // ords_shipped
+        ordArray[4] = new ArrayList();  // ords_complete
+        ordArray[5] = new ArrayList();  // ords_cancel
+        
+        float[] totalCollect = new float[6];
+        totalCollect[0] = 0.0f;  // total_all
+        totalCollect[1] = 0.0f;  // total_pending
+        totalCollect[2] = 0.0f;  // total_processing
+        totalCollect[3] = 0.0f;  // total_shipped
+        totalCollect[4] = 0.0f;  // total_complete
+        totalCollect[5] = 0.0f;  // total_cancel
+
         //Get current Date
         Date currentDate = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat ("yyyy/MM/dd");
@@ -101,6 +129,7 @@ public class orderController_admin extends HttpServlet {
             ord = new Order(o_id, o_date, o_total,o_status,o_payment, o_email);
             ords.add(ord);
         }
+        
             switch (sort) {
                 case "today":
                     {
@@ -116,56 +145,68 @@ public class orderController_admin extends HttpServlet {
                                 ords_all.add(o);
                                 i_all++;
                                 
-                                if (null != status)   switch (status) {
+                                if (null != status) {
+                                    for(int j = 0; j < orderstatus.size(); j++) {
+                                        if(status == orderstatus.get(j))  {
+                                            os[j]++; //i_pending++;
+                                            ordArray[j].add(o); //ords_pending.add(o);
+
+                                            total = o.totalToFloat();
+                                            totalCollect[j] += total; //total_pending += total;
+                                            total_all += total;
+                                        }  
+                                    }
+                                }  
                                     
-                                    case "Pending":{
-                                        i_pending++;
-                                        ords_pending.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_pending += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Processing":{
-                                        i_processing++;
-                                        ords_processing.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_processing += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Shipped":{
-                                        i_shipped++;
-                                        ords_shipped.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_shipped += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Complete":{
-                                        i_complete++;
-                                        ords_complete.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_complete += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    case "Cancel":{
-                                        i_cancel++;
-                                        ords_cancel.add(o);
-                                        
-                                        total = o.totalToFloat();
-                                        total_cancel += total;
-                                        total_all += total;
-                                        break;
-                                    }
-                                    default:
-                                        break;
-                                }
+//                                    switch (status) {
+//                                        case "Pending":{
+//                                            i_pending++;
+//                                            ords_pending.add(o);
+//
+//                                            total = o.totalToFloat();
+//                                            total_pending += total;
+//                                            total_all += total;
+//                                            break;
+//                                        }
+//                                        case "Processing":{
+//                                            i_processing++;
+//                                            ords_processing.add(o);
+//
+//                                            total = o.totalToFloat();
+//                                            total_processing += total;
+//                                            total_all += total;
+//                                            break;
+//                                        }
+//                                        case "Shipped":{
+//                                            i_shipped++;
+//                                            ords_shipped.add(o);
+//
+//                                            total = o.totalToFloat();
+//                                            total_shipped += total;
+//                                            total_all += total;
+//                                            break;
+//                                        }
+//                                        case "Complete":{
+//                                            i_complete++;
+//                                            ords_complete.add(o);
+//
+//                                            total = o.totalToFloat();
+//                                            total_complete += total;
+//                                            total_all += total;
+//                                            break;
+//                                        }
+//                                        case "Cancel":{
+//                                            i_cancel++;
+//                                            ords_cancel.add(o);
+//
+//                                            total = o.totalToFloat();
+//                                            total_cancel += total;
+//                                            total_all += total;
+//                                            break;
+//                                        }
+//                                        default:
+//                                            break;
+//                                }
                             }
                         }               break;
                     }
