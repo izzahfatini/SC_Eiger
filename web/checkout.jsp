@@ -25,8 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-        
+         
         <style>
             body {background-color: #F8F5FF;}
             .cart {
@@ -78,12 +77,6 @@
             .bawah {border-radius: 0 0 0.8em 0.8em}
             .satu { grid-area: 1/1/2/3; padding: 0 0 0 20px;}
             .option { width: 450px; }
-            
-            .paypal-container {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
-            }
         </style>
         
         <script type="text/javascript">
@@ -110,11 +103,9 @@
                 return true;
             }
 
-             function submitFormAfterPayPalApproval() {
-                document.form.submit();
-            }
+    
         </script>
-        <script src="https://www.paypal.com/sdk/js?client-id=AULbAPZ5FK57NfoRF4xD-OV3hyEE8_NxPsC3O5BZMKDaz0HfZwFW9pE3ONTOJVWNlwrKPaDfVQzsudBd&currency=MYR"></script>
+        
     </head>
     <body>
         
@@ -147,78 +138,47 @@
             <div> RM <fmt:formatNumber type = "number" minFractionDigits="2" maxFractionDigits = "2" value = "${totalall}" /> </div>
         </div> <br><br>
         
-        <form name="form" method="post" action="checkout2Controller" id="checkoutForm" onsubmit="return validatePaymentMethod();">       
-            <div>
-            <div class="base atas paymenthod"> Payment Method 
-             <!-- Payment Method Options -->
-             <div class="option">
-                 <!-- Example: Credit Card -->
-                 <input type="radio" name="pay" value="credit_card" id="creditCard">
-                 <label for="creditCard">Credit Card</label>
+        <form name="form" method="post" action="checkout2Controller" onsubmit="isEmpty()">       
+        <div>
+            <div class="base atas paymenthod"> Payment Method </div>
+            
+            <div class="paymenthod">
+                <input type="radio" name="pay" value="VISA / Master Card"> VISA / Master Card <br>
+                <input type="radio" name="pay" value="FPX / Online Banking"> FPX / Online Banking 
 
-                 <!-- Add more payment method options here -->
-                 <!-- Example: PayPal -->
-                 <input type="radio" name="pay" value="paypal" id="paypal">
-                 <label for="paypal">PayPal</label>
-             </div>
-
-             <div class="paypal-container">
-                 <!-- PayPal Button Container -->
-                 <div id="paypal-button-container"></div>
-             </div>
-            </div>
-            </div>
-            <br><br>    
+                <select name="pay">
+                    <option value="Maybank2u">Maybank2u </option>
+                    <option value="CIMB Clicks">CIMB Clicks </option>
+                    <option value="RHB Now">RHB Now </option>
+                </select> 
+    
+            </div> 
+            
+        </div> <br><br>    
         
         <input type="hidden" name="totalAll" value="<c:out value='${totalall}' />">
         <input type="hidden" name="purchasedate" id="purchasedate">           
-        <center> 
-            <!--<input type="submit" value="Place Order" style="color: white; background-color: #7E538D; padding: 12px 510px 12px 510px; border-radius: 10px"/></center>-->
+        <center> <input type="submit" value="Place Order" style="color: white; background-color: #7E538D; padding: 12px 510px 12px 510px; border-radius: 10px"/></center>
+
         </form>
         <br><br><br><br>
         
         <script>
             var date = new Date();
             var tdate = date.getDate();
-            var month = date.getMonth() + 1;
+            var month = date.getMonth()+1;
             var year = date.getUTCFullYear();
-
+            
             if (month < 10) {
                 var pDate = year + "/0" + month + "/" + tdate;
-            } else {
+            }
+            else    {
                 var pDate = year + "/" + month + "/" + tdate;
             }
-
+            
             document.getElementById("purchasedate").value = pDate;
-            
-
-            paypal.Buttons({
-                createOrder: function (data, actions) {
-                    // Fetch the total amount from the hidden input field
-                    var totalAmount = document.querySelector('input[name="totalAll"]').value;
-                    // Create a PayPal order
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                currency_code: 'MYR',
-                                value: totalAmount
-                            }
-                        }]
-                    });
-                },
-                
-            
-                onApprove: function (data, actions) {
-                    // Capture the PayPal order when the user approves the payment
-                    return actions.order.capture().then(function (details) {
-                        // Handle successful payment here
-                        // request.setAttribute("cartList", cartList);
-                        // You may want to redirect the user to a success page or show a success message
-                        document.getElementById("checkoutForm").submit();
-                    });
-                }
-            }).render('#paypal-button-container');
+            console.log(pDate);
         </script>
-
+        
     </body>
 </html>

@@ -7,7 +7,6 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -117,8 +116,7 @@ public class checkout2Controller extends HttpServlet {
         
         con.close();
 
-        String successMessage = "Payment successful! Transaction ID: " + newid; // Replace newid with the actual transaction ID
-        response.sendRedirect("placeorder.jsp?successMessage=" + URLEncoder.encode(successMessage, "UTF-8"));
+        sendPage(request, response, "/placeorder.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

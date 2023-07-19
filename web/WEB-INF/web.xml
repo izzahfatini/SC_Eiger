@@ -116,10 +116,6 @@
         <servlet-name>updateToShipped</servlet-name>
         <servlet-class>controller.updateToShipped</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>PayPalService</servlet-name>
-        <servlet-class>controller.PayPalService</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>addProductController</servlet-name>
         <url-pattern>/addProductController</url-pattern>
@@ -235,10 +231,6 @@
     <servlet-mapping>
         <servlet-name>updateToShipped</servlet-name>
         <url-pattern>/updateToShipped</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PayPalService</servlet-name>
-        <url-pattern>/PayPalService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

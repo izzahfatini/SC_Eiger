@@ -44,8 +44,6 @@
             .bawah {border-radius: 0 0 0.8em 0.8em;}
             
         </style>
-        
-
     </head>
     <body>
         
